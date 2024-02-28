@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 // internal import
 import shopImage from '../../assets/Images/exotic_cars_background.jpg';
-import { NavBar } from '../sharedComponents'; // ADD THIS
+import { NavBar } from '../sharedComponents'; 
 
 interface Props {
     title: string
@@ -41,17 +41,20 @@ const MainText = styled('div')({
 
 // This is our firsst functional based component!
 export const Home = (props: Props) => {
+    const myAuth = localStorage.getItem('auth')
 
     // return is always HTML & it can have ONLY 1 parent div 
     return (
         <Root>
-            <NavBar /> // ADD THIS
+            <NavBar />
             <Main>
                 <MainText>
+                    // add the authentication ternary inside our button
                     <Typography variant='h3'> {props.title}</Typography>
-                    <Button sx={{ marginTop: '10px' }} component={Link} to={"/shop"} variant='contained'>Enter if you dare.....☠</Button>
+                    <Button sx={{ marginTop: '10px' }} component={Link} to={myAuth === 'true' ? "/shop" : "/auth"} variant='contained'>Enter if you dare.....☠</Button>
                 </MainText>
             </Main>
         </Root>
     )
 }
+
